@@ -4,51 +4,28 @@ class Solution {
 
         for (int i = 0; i < s.length(); i++) {
 
+            int[] freq = new int[26];
+
             for (int j = i; j < s.length(); j++) {
 
-                String sub = s.substring(i, j + 1);
+                // Add current character
+                freq[s.charAt(j) - 'a']++;
 
-                int max = maxfrequency(sub);
-                int min = minfrequency(sub);
+                int max = 0;
+                int min = Integer.MAX_VALUE;
+
+                // Find max and min frequency
+                for (int k = 0; k < 26; k++) {
+                    if (freq[k] > 0) {
+                        max = Math.max(max, freq[k]);
+                        min = Math.min(min, freq[k]);
+                    }
+                }
 
                 sum += max - min;
             }
         }
 
         return sum;
-    }
-
-    private int maxfrequency(String ans) {
-        int[] freq = new int[26];
-
-        for (char ch : ans.toCharArray()) {
-            freq[ch - 'a']++;
-        }
-
-        int max = 0;
-
-        for (int i = 0; i < 26; i++) {
-            max = Math.max(max, freq[i]);
-        }
-
-        return max;
-    }
-
-    private int minfrequency(String ans) {
-        int[] freq = new int[26];
-
-        for (char ch : ans.toCharArray()) {
-            freq[ch - 'a']++;
-        }
-
-        int min = Integer.MAX_VALUE;
-
-        for (int i = 0; i < 26; i++) {
-            if (freq[i] > 0) {
-                min = Math.min(min, freq[i]);
-            }
-        }
-
-        return min;
     }
 }
