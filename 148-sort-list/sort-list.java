@@ -42,7 +42,7 @@ class Solution {
             }
             temp=temp.next;
         }
-        while(j!=null){
+        if(j!=null){
             temp.next=j;
             j=j.next;
             temp=temp.next;
